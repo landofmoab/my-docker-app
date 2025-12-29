@@ -1,0 +1,25 @@
+/.bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/node_modules
+/dist
+/.DS_Store
+myt-fullstack-app.code-workspace
+
+# Ignore Docker database data
+mysql-data/
+
+# Ignore Ruby dependencies
+backend/vendor/bundle/
+backend/tmp/
+backend/log/
+backend/.env
+
+# Ignore Angular dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Ignore OS files
+.DS_Store
