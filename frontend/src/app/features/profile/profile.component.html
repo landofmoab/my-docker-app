@@ -1,0 +1,12 @@
+<div class="profile-container">
+  <h2>User Profile</h2>
+  
+  <div *ngIf="profileData; else loading">
+    <p><strong>Name:</strong> {{ profileData.name }}</p>
+    <p><strong>Status:</strong> {{ profileData.status }}</p>
+  </div>
+
+  <ng-template #loading>
+    <p>Connecting to Rails backend...</p>
+  </ng-template>
+</div>

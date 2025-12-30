@@ -7,4 +7,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  namespace :api do
+    namespace :v1 do
+      # 'resource' (singular) is great for profiles where 
+      # a user usually only has one.
+      resource :profile, only: [:show]
+    end
+  end
 end
