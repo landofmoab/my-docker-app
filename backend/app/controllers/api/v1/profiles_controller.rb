@@ -3,7 +3,7 @@ class Api::V1::ProfilesController < ApplicationController
     # Later, you will fetch this from MariaDB via a Model
     # For now, let's return a hardcoded JSON response
     render json: {
-      name: "Landofmoab",
+      name: "Landofmoab Is Here",
       status: "Developer is Online",
       location: "WSL/Docker Environment"
     }

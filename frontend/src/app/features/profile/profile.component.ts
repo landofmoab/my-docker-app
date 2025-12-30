@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +11,7 @@ import { Component, inject, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   private http = inject(HttpClient);
-  profileData: any;
+  profileData = signal<any>(null);
 
   ngOnInit(): void {
     this.fetchProfile();
@@ -20,8 +20,10 @@ export class ProfileComponent implements OnInit {
   fetchProfile() {
     this.http.get('http://localhost:3000/api/v1/profile')
       .subscribe({
-        next: (data) => this.profileData = data,
-        error: (err) => console.error('Error fetching profile:', err)
+        next: (data) => {
+          this.profileData.set(data);
+        },
+        error: (err) => console.error(err)
       });
   }
 }
