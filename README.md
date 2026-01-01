@@ -18,8 +18,10 @@ Clean and build Docker
 - docker-compose logs backend
 - docker ps
 
+- docker-compose down -v && docker volume prune -f && docker builder prune -f && docker-compose up -d --build
+
 Permissions:
-- sudo chown -R $(whoami):$(whoami) backend/app/controllers/api/v1/
+- sudo chown -R $(whoami):$(whoami) backend/
 
 Frontend Stuff:
 - docker-compose exec frontend ng generate component features/profile (this is an example)
@@ -28,3 +30,7 @@ Backend Stuff:
 - docker-compose exec backend bash -c "bundle exec rails generate controller api/v1/poof-clouds" (this is an example)
 OR
 - docker-compose exec backend bundle exec rails generate controller api/v1/poof-clouds (this is an example)
+- docker-compose exec backend bundle exec rails c
+- docker-compose exec backend bundle exec rails db:migrate
+- docker-compose exec backend bundle exec rails db:rollback
+- docker-compose exec backend bundle exec rails g migration AddTableName

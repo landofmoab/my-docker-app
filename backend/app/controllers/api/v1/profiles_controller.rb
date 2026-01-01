@@ -5,7 +5,38 @@ class Api::V1::ProfilesController < ApplicationController
     render json: {
       name: "Landofmoab Is Here",
       status: "Developer is Online",
-      location: "WSL/Docker Environment"
+      location: "WSL/Docker Environment",
+      settings: settings,
     }
+  end
+
+  # This allows us to receive data from Angular
+  def update
+    # For now, we'll just "echo" the data back to prove it worked
+    # Later, you will do: @profile.update(profile_params)
+    received_name = params[:name]
+    received_status = params[:status]
+
+    render json: {
+      message: "Data received successfully!",
+      updated_name: received_name,
+      updated_status: received_status
+    }
+  end
+
+  def settings
+    {
+      theme: "dark",
+      notifications: true,
+      language: "en",
+    }
+  end
+
+
+  private
+
+  # Security measure: only allow these specific fields through
+  def profile_params
+    params.require(:profile).permit(:name, :status, :location)
   end
 end

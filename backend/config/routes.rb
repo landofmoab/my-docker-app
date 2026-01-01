@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       # 'resource' (singular) is great for profiles where 
       # a user usually only has one.
-      resource :profile, only: [:show]
+      resource :profile, only: [:show, :update]
     end
   end
 end
