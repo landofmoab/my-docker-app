@@ -1,11 +1,13 @@
 class Api::V1::ProfilesController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     # Later, you will fetch this from MariaDB via a Model
     # For now, let's return a hardcoded JSON response
     render json: {
-      name: "Landofmoab Is Here",
-      status: "Developer is Online",
-      location: "WSL/Docker Environment",
+      name: "#{current_user.first_name}",
+      email: current_user.email,
+      status: "Authenticated via JWT",
       settings: settings,
     }
   end

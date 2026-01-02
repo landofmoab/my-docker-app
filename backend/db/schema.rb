@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_01_173746) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_02_191556) do
   create_table "user_preferences", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "preferred_age_max", null: false
@@ -22,15 +22,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_173746) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
-    t.date "birthdate", null: false
+    t.date "birthdate"
     t.datetime "created_at", null: false
-    t.string "current_city", null: false
-    t.integer "education", null: false
+    t.string "current_city"
+    t.integer "education"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "first_name", null: false
-    t.string "gender", default: "male", null: false
-    t.integer "height", null: false
-    t.string "home_city", null: false
+    t.string "gender", default: "male"
+    t.integer "height"
+    t.string "home_city"
+    t.string "jti"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["jti"], name: "index_users_on_jti"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "user_preferences", "users", on_delete: :cascade

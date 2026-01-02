@@ -53,3 +53,7 @@ gem 'dockerfile-rails', '>= 0', group: :development
 gem 'graphql'
 
 gem 'graphiql-rails', group: :development
+
+gem 'devise'
+gem 'jwt'
+gem 'devise-jwt'
