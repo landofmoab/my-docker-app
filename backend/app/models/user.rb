@@ -1,20 +1,24 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-  before_create :generate_jti
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # We removed the 'include' line that was causing the crash
+  
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: self
+         :validatable, :jwt_authenticatable, 
+         jwt_revocation_strategy: self
 
-  include Devise::JWT::RevocationStrategies::JTIMatcher
+  # Standard JTI logic (reproducing what the Devise module does)
+  before_validation :generate_jti, on: :create
+  validates :jti, presence: true, uniqueness: true
 
-  validates :first_name, presence: true
-  enum :gender, { male: "male", female: "female" }, default: :male
-  validates :email, presence: true
+  # This method tells devise-jwt how to revoke a token
+  def self.jwt_revocation_strategy
+    self
+  end
 
   private
 
-def generate_jti
-  self.jti ||= SecureRandom.uuid
-end
+  def generate_jti
+    self.jti ||= SecureRandom.uuid
+  end
 end

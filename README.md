@@ -34,3 +34,4 @@ OR
 - docker-compose exec backend bundle exec rails db:migrate
 - docker-compose exec backend bundle exec rails db:rollback
 - docker-compose exec backend bundle exec rails g migration AddTableName
+- docker-compose exec backend bundle install

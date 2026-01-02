@@ -44,6 +44,10 @@ export class AuthService {
   }
 
   register(user: any) {
-    return this.http.post(`${this.apiUrl}/signup`, { user }, this.httpOptions);
+    console.log('Registering user:', user);
+    const payload = {
+      user: user
+    };
+    return this.http.post(`${this.apiUrl}/signup`, payload, this.httpOptions);
   }
 }
